@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { fetchCoins } from '../api';
 import Coin from '../components/Coin';
+import DarkmodeBtn from '../components/DarkmodeBtn';
 import { ICoin } from '../interface';
 
 const Container = styled.div`
@@ -14,6 +15,7 @@ const Container = styled.div`
 `;
 
 const Header = styled.header`
+  position: relative;
   height: 15vh;
   display: flex;
   justify-content: center;
@@ -21,7 +23,8 @@ const Header = styled.header`
 `;
 
 const Title = styled.h1`
-  font-size: 3.5rem;
+  font-size: 2.7rem;
+  font-weight: bold;
   color: ${(props) => props.theme.accentColor};
 `;
 
@@ -36,7 +39,8 @@ export default function Coins() {
   return (
     <Container>
       <Header>
-        <Title>Coins</Title>
+        <Title>Crypto Coins</Title>
+        <DarkmodeBtn></DarkmodeBtn>
       </Header>
 
       {isLoading ? (

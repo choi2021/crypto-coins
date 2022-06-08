@@ -62,6 +62,12 @@ a{
   text-decoration: none;
   color:inherit;
 }
+button{
+  background-color: inherit;
+  border: none;
+  color:inherit;
+  cursor: pointer;
+}
 `;
 
 export default Reset;

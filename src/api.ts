@@ -4,7 +4,7 @@ export async function fetchCoins() {
   return fetch(`${BASE_URL}/coins`).then((response) => response.json());
 }
 export async function fetchPriceData(coinId: string) {
-  return fetch(`${BASE_URL}/tickers/${coinId}?quotes=KRW`).then((response) =>
+  return fetch(`${BASE_URL}/tickers/${coinId}?quotes=USD`).then((response) =>
     response.json()
   );
 }
@@ -16,7 +16,7 @@ export async function fetchInfoData(coinId: string) {
 
 export async function fetchOHLCData(coinId: string) {
   const endDate = Math.floor(Date.now() / 1000);
-  const startDate = endDate - 60 * 60 * 24 * 6;
+  const startDate = endDate - (60 * 60 * 24 * 7 - 1);
   return fetch(
     `${BASE_URL}/coins/${coinId}/ohlcv/historical?start=${startDate}&end=${endDate}`
   ).then((response) => response.json());

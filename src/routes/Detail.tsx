@@ -10,6 +10,8 @@ import { FaArrowLeft } from 'react-icons/fa';
 import styled from 'styled-components';
 import { fetchInfoData, fetchPriceData } from '../api';
 import { IInfo, IPrice } from '../interface';
+import { useRecoilValue } from 'recoil';
+import { isDarkState } from '../atoms';
 
 const Container = styled.div`
   display: flex;
@@ -35,8 +37,8 @@ const Title = styled.h1`
 `;
 
 const Overview = styled.ul`
-  padding: 1em;
-  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0.5em;
+  background-color: ${(props) => props.theme.detailColor};
   display: flex;
   justify-content: space-between;
   border-radius: 1em;
@@ -54,23 +56,31 @@ const OverviewItem = styled.li`
   }
 `;
 
-const Description = styled.p`
+const Description = styled.p<{ isDark: boolean }>`
   margin: 1em 0;
-`;
-
-const Tabs = styled.div`
-  margin-top: 1em;
-  padding: 0.5em;
-  text-align: center;
-  display: grid;
-  background-color: rgba(0, 0, 0, 0.5);
-  grid-template-columns: repeat(2, 1fr);
+  padding: 1em;
   border-radius: 1em;
+  background-color: ${(props) =>
+    props.isDark ? 'transparent' : props.theme.detailColor};
 `;
 
 const Tab = styled.div<{ active: boolean }>`
   color: ${(props) =>
     props.active ? props.theme.accentColor : props.theme.textColor};
+`;
+
+const Tabs = styled.div<{ active: boolean }>`
+  margin-top: 1em;
+  padding: 0.5em;
+  border-radius: 1em;
+  text-align: center;
+  display: grid;
+  background-color: ${(props) => props.theme.detailColor};
+  grid-template-columns: repeat(2, 1fr);
+  ${Tab}:first-child {
+    border-right: 2px solid
+      ${(props) => (props.active ? props.theme.accentColor : 'white')};
+  }
 `;
 
 const BackBtn = styled.button`
@@ -87,6 +97,7 @@ export default function Detail() {
   const { coinId } = useParams();
   const location = useLocation();
   const state = location.state as { name: string };
+  const isDark = useRecoilValue(isDarkState);
   const chartMatch = useMatch(`/${coinId}/chart`);
   const priceMatch = useMatch(`/${coinId}/price`);
   const { data: Price, isLoading: priceLoading } = useQuery<IPrice>(
@@ -127,10 +138,10 @@ export default function Detail() {
             </OverviewItem>
             <OverviewItem>
               <span>Price: </span>
-              <span>{Price?.quotes.KRW.price.toFixed(3)}원</span>
+              <span>${Price?.quotes.USD.price.toFixed(3)}</span>
             </OverviewItem>
           </Overview>
-          <Description>{Info?.description}</Description>
+          <Description isDark={isDark}>{Info?.description}</Description>
           <Overview>
             <OverviewItem>
               <span>Total SUPPLY: </span>
@@ -141,7 +152,7 @@ export default function Detail() {
               <span>{Price?.max_supply}</span>
             </OverviewItem>
           </Overview>
-          <Tabs>
+          <Tabs active={chartMatch !== null || priceMatch !== null}>
             <Tab active={chartMatch !== null}>
               <Link to={`chart`}> Chart</Link>
             </Tab>

@@ -6,7 +6,7 @@ import { fetchPriceData } from '../api';
 import { IContext, IPrice } from '../interface';
 
 const Container = styled.div`
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${(props) => props.theme.detailColor};
   margin-top: 0.5em;
   width: 100%;
   border-radius: 1em;
@@ -41,28 +41,28 @@ export default function Price() {
         <Table>
           <tbody>
             <TableRow>
-              <th>최고가(KRW)</th>
-              <td>{data?.quotes.KRW.ath_price.toFixed(3)}</td>
+              <th> All Time High (ATH)</th>
+              <td>{data?.quotes.USD.ath_price.toFixed(3)}</td>
             </TableRow>
             <TableRow>
-              <th>총 시가</th>
-              <td>{data?.quotes.KRW.market_cap}</td>
+              <th>Market Capitalization</th>
+              <td>{data?.quotes.USD.market_cap}</td>
             </TableRow>
             <TableRow>
-              <th>거래량(24시간)</th>
-              <td>{data?.quotes.KRW.volume_24h}</td>
+              <th>Volume (24H)</th>
+              <td>{data?.quotes.USD.volume_24h}</td>
             </TableRow>
             <TableRow>
-              <th>거래량(일주일)</th>
-              <td>{data?.quotes.KRW.percent_change_7d}</td>
+              <th>Volume (7D)</th>
+              <td>{data?.quotes.USD.percent_change_7d}</td>
             </TableRow>
             <TableRow>
-              <th>가격변동(24시간)</th>
-              <td>{data?.quotes.KRW.percent_change_24h}</td>
+              <th>Percent_Change (24H)</th>
+              <td>{data?.quotes.USD.percent_change_24h}</td>
             </TableRow>
             <TableRow>
-              <th>가격변동(일주일)</th>
-              <td>{data?.quotes.KRW.percent_change_7d}</td>
+              <th>Percent_Change (7D)</th>
+              <td>{data?.quotes.USD.percent_change_7d}</td>
             </TableRow>
           </tbody>
         </Table>
