@@ -1,11 +1,12 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { fetchCoins } from '../api';
 import Coin from '../components/Coin';
 import DarkmodeBtn from '../components/DarkmodeBtn';
 import { ICoin } from '../interface';
+import { FaCoins } from 'react-icons/fa';
+import { Helmet } from 'react-helmet-async';
 
 const Container = styled.div`
   padding: 1em;
@@ -15,31 +16,53 @@ const Container = styled.div`
 `;
 
 const Header = styled.header`
-  position: relative;
   height: 15vh;
   display: flex;
   justify-content: center;
+  font-size: 3rem;
   align-items: center;
 `;
 
-const Title = styled.h1`
-  font-size: 2.7rem;
-  font-weight: bold;
+const Icon = styled.button`
   color: ${(props) => props.theme.accentColor};
+  width: 3.5rem;
+  height: 3.5rem;
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+const Title = styled.h1`
+  color: ${(props) => props.theme.accentColor};
+  font-weight: 900;
+  font-size: 3rem;
+  padding: 0.2em;
+  margin-right: 0.2em;
+  @media screen and (max-width: 600px) {
+    font-size: 2rem;
+  }
 `;
 
 const CoinList = styled.ul``;
 
 const Loader = styled.div`
   text-align: center;
+  color: ${(props) => props.theme.accentColor};
 `;
 
 export default function Coins() {
   const { data: coins, isLoading } = useQuery<ICoin[]>('allCoins', fetchCoins);
   return (
     <Container>
+      <Helmet>
+        <title>Crypto Coins</title>
+      </Helmet>
       <Header>
-        <Title>Crypto Coins</Title>
+        <Icon>
+          <FaCoins />
+        </Icon>
+        <Title> Crypto Coins</Title>
         <DarkmodeBtn></DarkmodeBtn>
       </Header>
 

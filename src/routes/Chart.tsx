@@ -37,8 +37,8 @@ export default function Chart() {
             theme: { mode: 'dark' },
             chart: {
               toolbar: { show: false },
-              width: '100%',
-              height: '100%',
+              width: 400,
+              height: 300,
               background: 'transparent',
             },
             colors: [],

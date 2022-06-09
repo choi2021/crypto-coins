@@ -7,24 +7,26 @@ const ToggleBtn = styled.button<{ isActive: boolean }>`
   font-size: 1.1rem;
   background-color: ${(props) => (props.isActive ? 'white' : 'transparent')};
   transition: 0.3s ease-in-out all;
+  @media screen and (max-width: 600px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const Wrapper = styled.div`
-  position: absolute;
-  height: 2rem;
-  right: 0;
-  top: 50%;
-  transform: translateY(-40%);
   display: flex;
+  height: 2.5rem;
   border: solid ${(props) => props.theme.accentColor} 3px;
-  border-radius: 1em;
+  border-radius: 1.1em;
   color: ${(props) => props.theme.accentColor};
   ${ToggleBtn}:first-child {
     border-right: solid ${(props) => props.theme.accentColor} 3px;
-    border-radius: 0.7em 0 0 0.7em;
+    border-radius: 1.2em 0 0 1.2em;
   }
   ${ToggleBtn}:last-child {
-    border-radius: 0 0.7em 0.7em 0;
+    border-radius: 0 1.2em 1.2em 0;
+  }
+  @media screen and (max-width: 600px) {
+    height: 2rem;
   }
 `;
 

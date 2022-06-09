@@ -4,6 +4,7 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { RecoilRoot } from 'recoil';
+import { HelmetProvider } from 'react-helmet-async';
 
 const queryClient = new QueryClient();
 
@@ -14,9 +15,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <BrowserRouter basename={`${process.env.PUBLIC_URL}`}>
         <RecoilRoot>
-          <App></App>
+          <HelmetProvider>
+            <App />
+          </HelmetProvider>
         </RecoilRoot>
       </BrowserRouter>
     </QueryClientProvider>

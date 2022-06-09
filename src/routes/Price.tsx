@@ -23,6 +23,12 @@ const TableRow = styled.tr`
   padding: 0.5em;
   margin-bottom: 0.2em;
   grid-template-columns: repeat(2, 1fr);
+  @media screen and (max-width: 600px) {
+    th,
+    td {
+      font-size: 0.8rem;
+    }
+  }
 `;
 
 export default function Price() {

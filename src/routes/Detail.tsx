@@ -12,12 +12,13 @@ import { fetchInfoData, fetchPriceData } from '../api';
 import { IInfo, IPrice } from '../interface';
 import { useRecoilValue } from 'recoil';
 import { isDarkState } from '../atoms';
+import { Helmet } from 'react-helmet-async';
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1em;
-  height: 99vh;
+  height: 100vh;
   max-width: 35rem;
   margin: 0 auto;
   text-align: center;
@@ -25,6 +26,7 @@ const Container = styled.div`
 
 const Header = styled.header`
   height: 15vh;
+  margin-bottom: 1em;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,6 +36,9 @@ const Header = styled.header`
 const Title = styled.h1`
   font-size: 3.5rem;
   color: ${(props) => props.theme.accentColor};
+  @media screen and (max-width: 600px) {
+    font-size: 2.5rem;
+  }
 `;
 
 const Overview = styled.ul`
@@ -91,6 +96,10 @@ const BackBtn = styled.button`
   position: absolute;
   right: 0;
   top: 42%;
+  transition: 0.3s color ease;
+  &:hover {
+    color: ${(props) => props.theme.accentColor};
+  }
 `;
 
 export default function Detail() {
@@ -112,11 +121,15 @@ export default function Detail() {
   const loading = priceLoading || infoLoading;
   return (
     <Container>
+      <Helmet>
+        <title>
+          {state?.name ? state.name : loading ? 'Loading' : Info?.name}
+        </title>
+      </Helmet>
       <Header>
         <Title>
           {state?.name ? state.name : loading ? 'Loading' : Info?.name}
         </Title>
-
         <BackBtn>
           <Link to={'/'}>
             <FaArrowLeft></FaArrowLeft>
@@ -141,7 +154,11 @@ export default function Detail() {
               <span>${Price?.quotes.USD.price.toFixed(3)}</span>
             </OverviewItem>
           </Overview>
-          <Description isDark={isDark}>{Info?.description}</Description>
+          <Description isDark={isDark}>
+            {Info && Info?.description.length > 300
+              ? Info?.description.slice(0, 300) + '...'
+              : Info?.description}
+          </Description>
           <Overview>
             <OverviewItem>
               <span>Total SUPPLY: </span>
