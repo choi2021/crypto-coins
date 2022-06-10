@@ -32,7 +32,7 @@ const TableRow = styled.tr`
 `;
 
 export default function Price() {
-  const { id, info } = useOutletContext<IContext>(); //info로 왜 전달안될까?
+  const { id } = useOutletContext<IContext>();
   const { data, isLoading } = useQuery<IPrice>(
     'priceInfo',
     () => fetchPriceData(id),
