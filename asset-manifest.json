@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/crypto-coins/static/js/main.4e23bfc4.js",
+    "main.js": "/crypto-coins/static/js/main.64327dd3.js",
     "index.html": "/crypto-coins/index.html",
-    "main.4e23bfc4.js.map": "/crypto-coins/static/js/main.4e23bfc4.js.map"
+    "main.64327dd3.js.map": "/crypto-coins/static/js/main.64327dd3.js.map"
   },
   "entrypoints": [
-    "static/js/main.4e23bfc4.js"
+    "static/js/main.64327dd3.js"
   ]
 }
